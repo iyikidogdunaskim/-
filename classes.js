@@ -51,19 +51,19 @@ class Util {
     } else if (elem.webkitRequestFullscreen) {
       elem.webkitRequestFullscreen(); // Safari
     }
-    IsFullScreen = true;
+    this.IsFullScreen = true;
   }
 
   static isEffectivelyFullscreen() {
-    if(IsFullScreen) return true;
+    if(this.IsFullScreen) return true;
 
     if (document.fullscreenElement) {
-      IsFullScreen = true;
+      this.IsFullScreen = true;
     }
     else if (window.innerHeight > window.screen.height * 0.9) {
-      IsFullScreen = true;
+      this.IsFullScreen = true;
     }
-    IsFullScreen = false;
+    this.IsFullScreen = false;
 
     return this.IsFullScreen;
   }
