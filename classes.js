@@ -486,8 +486,7 @@ class Snow extends Animationn {
         const columnWidth = window.innerWidth / this.snowColumns;
         const colIndex = Math.max(0, Math.min(this.snowColumns - 1, Math.floor(obj.x / columnWidth)));
 
-        //const amount = Util.randomFloat(0.25, 0.35) * delta;
-        const amount = Util.randomFloat(1, 2) * delta;
+        const amount = Util.randomFloat(0.5, 0.75) * delta;
 
         this.snowMap[colIndex] += amount * 0.6;
         if (colIndex > 0) {
