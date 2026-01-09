@@ -286,6 +286,8 @@ $(document).ready(function() {
         fields: 'files(id, name)',
         access_token: access_token
       });
+      
+      console.table(response?.result?.files);
 
       if (!(response?.result?.files?.length > 0)) {
         console.log('[loadFromGoogleDrive] No existing file found in Drive.');
@@ -966,9 +968,16 @@ $(document).ready(function() {
 
   //registerHandlers();
 
+  if ((typeof google !== 'undefined' && google.accounts?.oauth2)) {
+    clearInterval(checkGoogle);
+    (async function () {
+      await initGoogleDrive();
+    })();
+    return;
+  }
+
   let tryCount = 0;
   var checkGoogle = setInterval(function() {
-    console.log(typeof google);
     tryCount++;
     if (tryCount > 3) {
       clearInterval(checkGoogle);
@@ -980,6 +989,6 @@ $(document).ready(function() {
         await initGoogleDrive();
       })();
     }
-  }, 3000);
+  }, 5000);
   // #endregion
 });
