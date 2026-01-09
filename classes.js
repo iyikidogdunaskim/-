@@ -1,6 +1,7 @@
 class Util {
   static DEBUG = false;
   static PREPROD = false;  
+  static IsFullScreen = false; 
 
   static lerpAngle(a, b, t) {
     let diff = ((b - a + 540) % 360) - 180;
@@ -50,18 +51,21 @@ class Util {
     } else if (elem.webkitRequestFullscreen) {
       elem.webkitRequestFullscreen(); // Safari
     }
+    IsFullScreen = true;
   }
 
   static isEffectivelyFullscreen() {
+    if(IsFullScreen) return true;
+
     if (document.fullscreenElement) {
-      return true;
+      IsFullScreen = true;
     }
-
-    if (window.innerHeight > window.screen.height * 0.9) {
-      return true;
+    else if (window.innerHeight > window.screen.height * 0.9) {
+      IsFullScreen = true;
     }
+    IsFullScreen = false;
 
-    return false;
+    return this.IsFullScreen;
   }
   
   static showHint(text, { duration = 3000, style = "soft"} = {}) {   
@@ -84,7 +88,7 @@ class Util {
 }
 window.Util = Util;
 
-console.log('v1.4');
+console.log('v1.5');
 
 // if(!Util.DEBUG && !Util.PREPROD) {
 //   console.log = function() {};

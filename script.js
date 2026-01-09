@@ -281,39 +281,63 @@ $(document).ready(function() {
         await requestNewToken();
         return;
       }
-    
-      // console.log('[loadFromGoogleDrive]', FILE_NAME, 'File search started.');
-      // const response = await gapi.client.drive.files.list({
-      //   q: `name='${FILE_NAME}' and trashed=false`,
-      //   fields: 'files(id, name)',
-      //   access_token: access_token
-      // });
-      
-      // console.table(response?.result?.files);
 
-      // if (!(response?.result?.files?.length > 0)) {
-      //   console.log('[loadFromGoogleDrive] No existing file found in Drive.');
-      //   return;
-      // }
-
-      // console.log('[loadFromGoogleDrive] File found in Drive:', response.result.files[0].name);
-      // fileId = response.result.files[0].id;
-      
-      const contentResponse = await fetch(`https://www.googleapis.com/drive/v3/files/${fileId}?alt=media&supportsAllDrives=true`, {
+      const fetchHeaders = {
         headers: {
           'Authorization': 'Bearer ' + access_token
         }
-      });
+      };
+      
+      const htmlResponse = await fetch(`https://www.googleapis.com/drive/v3/files/${fileId}?alt=media&supportsAllDrives=true`, fetchHeaders);
+      if (!htmlResponse.ok) {
+        console.log('[loadFromGoogleDrive] htmlResponse Could not read file from Drive.');
+        return;
+      }      
+      const htmlBody = await htmlResponse.text();
+      $('#bodyDiv').html(htmlBody);
 
-      if (!contentResponse.ok) {
-        console.log('[loadFromGoogleDrive] Could not read file from Drive.');
+      console.log('[loadFromGoogleDrive]', 'photo1.jpg', 'File search started.');
+      const responseP1 = await gapi.client.drive.files.list({ q: `name='photo1.jpg' and trashed=false`, fields: 'files(id, name)', access_token: access_token });
+      if (!(responseP1?.result?.files?.length > 0)) {
+        console.log('[loadFromGoogleDrive] No existing file found in Drive.');
         return;
       }
+      console.log('[loadFromGoogleDrive] File found in Drive:', responseP1.result.files[0].name);
+      const imgP1Response = await fetch(`https://www.googleapis.com/drive/v3/files/${responseP1.result.files[0].id}?alt=media&supportsAllDrives=true`, fetchHeaders);
+      if (!imgP1Response.ok) {
+        console.log('[loadFromGoogleDrive] imgP1Response Could not read file from Drive.');
+        return;
+      }
+      const imgP1Blob = await imgP1Response.blob();
+      var imgP1Src = URL.createObjectURL(imgP1Blob);
+      $('#photo1').attr('src', imgP1Src);
+
+      console.log('[loadFromGoogleDrive]', 'photo2.jpg', 'File search started.');
+      const responseP2 = await gapi.client.drive.files.list({ q: `name='photo2.jpg' and trashed=false`, fields: 'files(id, name)', access_token: access_token });
+      if (!(responseP2?.result?.files?.length > 0)) {
+        console.log('[loadFromGoogleDrive] No existing file found in Drive.');
+        return;
+      }
+      console.log('[loadFromGoogleDrive] File found in Drive:', responseP2.result.files[0].name);
+      const imgP2Response = await fetch(`https://www.googleapis.com/drive/v3/files/${responseP2.result.files[0].id}?alt=media&supportsAllDrives=true`, fetchHeaders);
+      if (!imgP2Response.ok) {
+        console.log('[loadFromGoogleDrive] imgP1Response Could not read file from Drive.');
+        return;
+      }
+      const imgP2Blob = await imgP2Response.blob();
+      var imgP2Src = URL.createObjectURL(imgP2Blob);
+      $('#photo2').attr('src', imgP2Src);
+      
+      const imgKucukResponse = await fetch(`https://www.googleapis.com/drive/v3/files/1-m6wqXNJBhHYJuFW3wX7W_afSeirXiE6?alt=media&supportsAllDrives=true`, fetchHeaders);
+      if (!imgKucukResponse.ok) {
+        console.log('[loadFromGoogleDrive] imgKucukResponse Could not read file from Drive.');
+        return;
+      }
+      const imgKucukBlob = await imgKucukResponse.blob();
+      var imgKucukSrc = URL.createObjectURL(imgKucukBlob);
+      $('#nisaKucuk').attr('src', imgKucukSrc);
 
       fileRead = true;  
-      
-      const htmlBody = await contentResponse.text();
-      $('#bodyDiv').html(htmlBody);
 
       console.log('[loadFromGoogleDrive] Data loaded successfully from Drive: ', htmlBody);
       registerHandlers(); 
