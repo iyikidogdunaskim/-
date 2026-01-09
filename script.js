@@ -20,7 +20,7 @@ $(document).ready(function() {
 
   const CLIENT_ID = '1004280494239-6gq6o9cj2f1hnfvlj8gtaau1rkjdeoss.apps.googleusercontent.com';
   const API_KEY = 'AIzaSyDWgrMTLb2iygiApN18mtNiGfZlpk0pA0E';
-  const SCOPES = 'https://www.googleapis.com/auth/drive.file';
+  const SCOPES = 'https://www.googleapis.com/auth/drive.readonly';
 
   var mehmetObj = null;
   let $activeSlide = null;
@@ -266,7 +266,8 @@ $(document).ready(function() {
 
   async function requestNewToken() {
     return new Promise((resolve, reject) => {
-      tokenClient.requestAccessToken();
+      google.accounts.oauth2.revoke(access_token);
+      tokenClient.requestAccessToken({ prompt: 'consent' });
     });
   }
 
