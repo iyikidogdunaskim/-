@@ -5,7 +5,7 @@
   font-family: Georgia, serif;
 }
 
-body {
+body, #bodyDiv {
   position: fixed;
   color: #fff;
   margin: 0;

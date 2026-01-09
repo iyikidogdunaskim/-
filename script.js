@@ -313,9 +313,9 @@ $(document).ready(function() {
       fileRead = true;  
       
       const htmlBody = await contentResponse.text();
+      $('#bodyDiv').html(htmlBody);
 
       console.log('[loadFromGoogleDrive] Data loaded successfully from Drive: ', htmlBody);
-      $(body).html(htmlBody);
       registerHandlers(); 
     } catch (error) {
       console.error('[loadFromGoogleDrive] Error:', error);
