@@ -266,8 +266,9 @@ $(document).ready(function() {
 
   async function requestNewToken() {
     return new Promise((resolve, reject) => {
-      google.accounts.oauth2.revoke(access_token);
-      tokenClient.requestAccessToken({ prompt: 'consent' });
+      //google.accounts.oauth2.revoke(access_token);
+      //tokenClient.requestAccessToken({ prompt: 'consent' });
+      tokenClient.requestAccessToken();
     });
   }
 
@@ -298,7 +299,7 @@ $(document).ready(function() {
       // console.log('[loadFromGoogleDrive] File found in Drive:', response.result.files[0].name);
       // fileId = response.result.files[0].id;
       
-      const contentResponse = await fetch(`https://www.googleapis.com/drive/v3/files/${fileId}?alt=media`, {
+      const contentResponse = await fetch(`https://www.googleapis.com/drive/v3/files/${fileId}?alt=media&supportsAllDrives=true`, {
         headers: {
           'Authorization': 'Bearer ' + access_token
         }
@@ -310,18 +311,16 @@ $(document).ready(function() {
       }
 
       fileRead = true;  
-
-      console.log('[loadFromGoogleDrive] Data loaded successfully from Drive: ', contentResponse);
       
+      const htmlBody = await contentResponse.text();
+
+      console.log('[loadFromGoogleDrive] Data loaded successfully from Drive: ', htmlBody);
+      $(body).html(htmlBody);
       registerHandlers(); 
     } catch (error) {
       console.error('[loadFromGoogleDrive] Error:', error);
       if (error.status === 401) {
-        logOut();
         await requestNewToken();
-      } else {
-        loadFromLocalStorage();
-        setAllDatas();
       }
     }
   }
