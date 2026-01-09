@@ -4,13 +4,7 @@ $(document).ready(function() {
   }
 
   // #region Dom Elements
-  const $slides = $(".slide");
   let $music = null;
-
-  setMusic("#bg-music");
-  // "#music-acapella"
-  
-  const $stars = $('#stars');
   let $snowflakes = null;
   // #endregion
 
@@ -125,6 +119,7 @@ $(document).ready(function() {
 
   // #region Functions
   function registerHandlers() {
+    setMusic("#bg-music");
     // #region Handlers
     $(document).on('click', function (e) {
       if(!documentClickEnabled && !Util.DEBUG && !Util.PREPROD) {
@@ -145,7 +140,7 @@ $(document).ready(function() {
       //           '\r\n',started, e);
 
       if (e.clientX > (window.innerWidth / 2 + window.innerWidth / clickThreshold)) {
-        if (index < $slides.length - 1) {
+        if (index < $(".slide").length - 1) {
           index++;
           showSlide(index);
         }
@@ -452,7 +447,7 @@ $(document).ready(function() {
           width: row.size,
           height: row.size,
         });
-        $stars.append($star);
+        $('#stars').append($star);
         objectList.push(new Obj({ el: $star[0], x, y, size: row.size }));
       } 
     });
@@ -503,7 +498,7 @@ $(document).ready(function() {
       shootStarTimeout = null;
     }  
     
-    $stars.append(`<img id="northStar" src="assets/icons/star-spark.svg" class="star pulse moving-obj"/>`);  
+    $('#stars').append(`<img id="northStar" src="assets/icons/star-spark.svg" class="star pulse moving-obj"/>`);  
   }
 
   function stopTypewriter() {
@@ -866,12 +861,12 @@ $(document).ready(function() {
   }
   
   function setActiveSlide(id) {
-    $slides.removeClass("active");
+    $(".slide").removeClass("active");
     $activeSlide = $('#' + id);
     $activeSlide.addClass("active");
     activeSlideId = id;
-    index = $slides.index($activeSlide);
-    activeIndex = $slides.index($activeSlide);
+    index = $(".slide").index($activeSlide);
+    activeIndex = $(".slide").index($activeSlide);
     console.log('[setActiveSlide] ', id, index, activeIndex);    
   }
 
@@ -907,8 +902,8 @@ $(document).ready(function() {
     }
 
     stopTypewriter();
-    $slides.removeClass("active");
-    $activeSlide = $slides.eq(i).addClass("active");
+    $(".slide").removeClass("active");
+    $activeSlide = $(".slide").eq(i).addClass("active");
     activeSlideId = $activeSlide.attr('id');
     $('#rocket').remove();
     launchEnabled = false;
