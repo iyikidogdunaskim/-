@@ -16,7 +16,7 @@ $(document).ready(function() {
   let gapiInited = false;
   let gisInited = false;
   let fileRead = false;
-  const FILE_NAME = `3-1/31body.html`;
+  const FILE_NAME = `31body.html`;
 
   const CLIENT_ID = '1004280494239-6gq6o9cj2f1hnfvlj8gtaau1rkjdeoss.apps.googleusercontent.com';
   const API_KEY = 'AIzaSyDWgrMTLb2iygiApN18mtNiGfZlpk0pA0E';
@@ -966,14 +966,20 @@ $(document).ready(function() {
 
   //registerHandlers();
 
+  let tryCount = 0;
   var checkGoogle = setInterval(function() {
     console.log(typeof google);
-    if (typeof google !== 'undefined' && google.accounts?.oauth2) {
+    tryCount++;
+    if (tryCount > 3) {
+      clearInterval(checkGoogle);
+      return;
+    }
+    if ((typeof google !== 'undefined' && google.accounts?.oauth2)) {
       clearInterval(checkGoogle);
       (async function () {
         await initGoogleDrive();
       })();
     }
-  }, 250);
+  }, 3000);
   // #endregion
 });
