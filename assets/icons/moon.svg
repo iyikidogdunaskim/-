@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="25.32 25.54 41.46 41.46" preserveAspectRatio="xMidYMid meet" overflow="hidden" style="display:block;margin:0;padding:0">
+    <defs>
+        <style>.cls-1,.cls-3{fill:#fff;}.cls-1{opacity:0.1;}.cls-2{opacity:0.75;}.cls-4{fill:#cedcf0;}.cls-5{fill:#efefef;}</style>
+    </defs>
+    <title>moon_1</title>
+    <g id="Layer_2" data-name="Layer 2">
+        <g id="Layer_1-2" data-name="Layer 1">
+            <g id="moon">
+                <circle class="cls-1" cx="46.05" cy="46.27" r="20.73" transform="translate(-0.52 0.52) rotate(-0.64)"/>
+                <!-- removed embedded raster image to restore transparency (base64 PNG) -->
+                <circle class="cls-3" cx="46.05" cy="46.27" r="15.34" transform="translate(-0.52 0.52) rotate(-0.64)"/>
+                <path class="cls-4" d="M54,40.84a14.79,14.79,0,0,1-20,14A14.78,14.78,0,1,0,51.28,32.45,14.7,14.7,0,0,1,54,40.84Z"/>
+                <path class="cls-5" d="M45.86,31.36a8.84,8.84,0,0,1,4.75.84,2.43,2.43,0,0,1-4.75-.84ZM39.58,34a3.43,3.43,0,1,1-1,4.76A3.43,3.43,0,0,1,39.58,34ZM47,35a2.43,2.43,0,1,1-.67,3.36A2.43,2.43,0,0,1,47,35Z"/>
+            </g>
+        </g>
+    </g>
+</svg>
