@@ -10,13 +10,13 @@ $(document).ready(function() {
 
   // #region Params
   let access_token = null;
-  let fileId = null;
+  let fileId = '1slrxsyEkjB3d3cPj9oLRqnFwqO50LRSd';
   let tokenClient = null;
 
   let gapiInited = false;
   let gisInited = false;
   let fileRead = false;
-  const FILE_NAME = `31body.html`;
+  const FILE_NAME = `301body.html`;
 
   const CLIENT_ID = '1004280494239-6gq6o9cj2f1hnfvlj8gtaau1rkjdeoss.apps.googleusercontent.com';
   const API_KEY = 'AIzaSyDWgrMTLb2iygiApN18mtNiGfZlpk0pA0E';
@@ -280,22 +280,22 @@ $(document).ready(function() {
         return;
       }
     
-      console.log('[loadFromGoogleDrive]', FILE_NAME, 'File search started.');
-      const response = await gapi.client.drive.files.list({
-        q: `name='${FILE_NAME}' and trashed=false`,
-        fields: 'files(id, name)',
-        access_token: access_token
-      });
+      // console.log('[loadFromGoogleDrive]', FILE_NAME, 'File search started.');
+      // const response = await gapi.client.drive.files.list({
+      //   q: `name='${FILE_NAME}' and trashed=false`,
+      //   fields: 'files(id, name)',
+      //   access_token: access_token
+      // });
       
-      console.table(response?.result?.files);
+      // console.table(response?.result?.files);
 
-      if (!(response?.result?.files?.length > 0)) {
-        console.log('[loadFromGoogleDrive] No existing file found in Drive.');
-        return;
-      }
+      // if (!(response?.result?.files?.length > 0)) {
+      //   console.log('[loadFromGoogleDrive] No existing file found in Drive.');
+      //   return;
+      // }
 
-      console.log('[loadFromGoogleDrive] File found in Drive:', response.result.files[0].name);
-      fileId = response.result.files[0].id;
+      // console.log('[loadFromGoogleDrive] File found in Drive:', response.result.files[0].name);
+      // fileId = response.result.files[0].id;
       
       const contentResponse = await fetch(`https://www.googleapis.com/drive/v3/files/${fileId}?alt=media`, {
         headers: {
@@ -308,17 +308,11 @@ $(document).ready(function() {
         return;
       }
 
-      //const data = await contentResponse;
       fileRead = true;  
 
-      if(!isNullOrEmpty(timeOut)) {
-        clearTimeout(timeOut);
-      }
-      
-      registerHandlers();
-        
       console.log('[loadFromGoogleDrive] Data loaded successfully from Drive: ', contentResponse);
-       
+      
+      registerHandlers(); 
     } catch (error) {
       console.error('[loadFromGoogleDrive] Error:', error);
       if (error.status === 401) {
