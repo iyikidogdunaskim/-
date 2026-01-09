@@ -88,7 +88,7 @@ class Util {
 }
 window.Util = Util;
 
-console.log('v1.5');
+console.log('v1.6');
 
 // if(!Util.DEBUG && !Util.PREPROD) {
 //   console.log = function() {};

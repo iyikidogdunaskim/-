@@ -294,7 +294,6 @@ $(document).ready(function() {
         return;
       }      
       const htmlBody = await htmlResponse.text();
-      $('#bodyDiv').html(htmlBody);
 
       console.log('[loadFromGoogleDrive]', 'photo1.jpg', 'File search started.');
       const responseP1 = await gapi.client.drive.files.list({ q: `name='photo1.jpg' and trashed=false`, fields: 'files(id, name)', access_token: access_token });
@@ -309,8 +308,7 @@ $(document).ready(function() {
         return;
       }
       const imgP1Blob = await imgP1Response.blob();
-      var imgP1Src = URL.createObjectURL(imgP1Blob);
-      $('#photo1').attr('src', imgP1Src);
+      const imgP1Src = URL.createObjectURL(imgP1Blob);
 
       console.log('[loadFromGoogleDrive]', 'photo2.jpg', 'File search started.');
       const responseP2 = await gapi.client.drive.files.list({ q: `name='photo2.jpg' and trashed=false`, fields: 'files(id, name)', access_token: access_token });
@@ -325,8 +323,7 @@ $(document).ready(function() {
         return;
       }
       const imgP2Blob = await imgP2Response.blob();
-      var imgP2Src = URL.createObjectURL(imgP2Blob);
-      $('#photo2').attr('src', imgP2Src);
+      const imgP2Src = URL.createObjectURL(imgP2Blob);
       
       const imgKucukResponse = await fetch(`https://www.googleapis.com/drive/v3/files/1-m6wqXNJBhHYJuFW3wX7W_afSeirXiE6?alt=media&supportsAllDrives=true`, fetchHeaders);
       if (!imgKucukResponse.ok) {
@@ -334,10 +331,14 @@ $(document).ready(function() {
         return;
       }
       const imgKucukBlob = await imgKucukResponse.blob();
-      var imgKucukSrc = URL.createObjectURL(imgKucukBlob);
-      $('#nisaKucuk').attr('src', imgKucukSrc);
+      const imgKucukSrc = URL.createObjectURL(imgKucukBlob);
 
       fileRead = true;  
+
+      $('#bodyDiv').html(htmlBody);
+      $('#photo1').attr('src', imgP1Src);
+      $('#photo2').attr('src', imgP2Src);
+      $('#nisaKucuk').attr('src', imgKucukSrc);
 
       console.log('[loadFromGoogleDrive] Data loaded successfully from Drive: ', htmlBody);
       registerHandlers(); 
