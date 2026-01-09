@@ -22,7 +22,7 @@ $(document).ready(function() {
   let fileRead = false;
   const FILE_NAME = `3-1/31body.html`;
 
-  const CLIENT_ID = '1004280494239-bm24eig1gk63rgvk3in8rjh9bp5gcd6t.apps.googleusercontent.com';
+  const CLIENT_ID = '1004280494239-6gq6o9cj2f1hnfvlj8gtaau1rkjdeoss.apps.googleusercontent.com';
   const API_KEY = 'AIzaSyDWgrMTLb2iygiApN18mtNiGfZlpk0pA0E';
   const SCOPES = 'https://www.googleapis.com/auth/drive.file';
 
