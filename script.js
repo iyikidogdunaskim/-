@@ -1,8 +1,4 @@
 $(document).ready(function() {
-  if(!Util.DEBUG && !Util.PREPROD) {
-    console.log = function() {};
-  }
-
   // #region Dom Elements
   let $music = null;
   let $snowflakes = null;

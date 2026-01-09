@@ -1,6 +1,6 @@
 class Util {
   static DEBUG = false;
-  static PREPROD = false;
+  static PREPROD = false;  
 
   static lerpAngle(a, b, t) {
     let diff = ((b - a + 540) % 360) - 180;
@@ -83,6 +83,10 @@ class Util {
   }
 }
 window.Util = Util;
+
+// if(!Util.DEBUG && !Util.PREPROD) {
+//   console.log = function() {};
+// }
 
 class Target {
   constructor(options = {}) {
