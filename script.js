@@ -971,6 +971,7 @@ $(document).ready(function() {
   //registerHandlers();
 
   var checkGoogle = setInterval(function() {
+    console.log(typeof google);
     if (typeof google !== 'undefined' && google.accounts?.oauth2) {
       clearInterval(checkGoogle);
       (async function () {
